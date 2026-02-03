@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <nav>
     <div class="logo">ShopDemo</div>
     <ul class="nav-links">
@@ -18,11 +19,9 @@
 </nav>
 
 <section class="hero">
-    <img src="https://picsum.photos/1200/400?random=1" alt="Shop Hero" class="hero-img">
-    <div class="hero-text">
-        <h1>Welcome to ShopDemo</h1>
-        <p>Click a category below to start shopping!</p>
-    </div>
+    <img src="https://picsum.photos/1200/400?random=1" alt="Shop Hero">
+    <h1>Welcome to ShopDemo</h1>
+    <p>Click a category below to start shopping!</p>
 </section>
 
 <section class="categories">
@@ -44,5 +43,22 @@
 </section>
 
 <a href="https://wa.me/2349114133756" target="_blank" class="whatsapp-btn">Chat on WhatsApp</a>
+<a href="#" class="back-to-top" id="backToTop">↑ Top</a>
+
+<script>
+// Back to top button functionality
+const backToTop = document.getElementById("backToTop");
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTop.style.display = "block";
+    } else {
+        backToTop.style.display = "none";
+    }
+};
+backToTop.addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
+</script>
+
 </body>
 </html>
