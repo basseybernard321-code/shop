@@ -3,223 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ports Logs Marketplace</title>
+<title>Ports Marketplace</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-}
-
-/* HEADER */
-header {
-  background: #0f172a;
-  color: white;
-  padding: 14px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  font-size: 18px;
-}
-
-header button {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-/* HERO */
-.hero {
-  padding: 50px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: white;
-}
-
-.hero h2 {
-  font-size: 30px;
-}
-
-.hero a {
-  display: inline-block;
-  background: white;
-  color: #2563eb;
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* MARKET */
-.section {
-  padding: 40px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.market {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.item {
-  background: white;
-  border-radius: 14px;
-  padding: 18px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-}
-
-.item span {
-  font-weight: bold;
-  color: #2563eb;
-}
-
-.item button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 20px;
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-box {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 350px;
-}
-
-.modal-box h3 {
-  margin-bottom: 10px;
-}
-
-.modal-box button {
-  width: 100%;
-  padding: 10px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  margin-top: 10px;
-}
-
-.payment-methods label {
-  display: block;
-  margin: 8px 0;
-}
-
-/* SUCCESS */
-.success {
-  text-align: center;
-  display: none;
-}
-
-.success h3 {
-  color: green;
-}
+body { margin:0; font-family: Arial; background:#f4f6f8; }
+header { background:#0f172a; color:#fff; padding:15px; text-align:center; }
+.market { padding:30px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; }
+.card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,.08); }
+.card a { display:inline-block; margin-top:10px; text-decoration:none; background:#2563eb; color:#fff; padding:8px 14px; border-radius:20px; }
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Ports Marketplace</h1>
-  <button>Login</button>
+  <h2>Ports Marketplace</h2>
+  <p>Choose a category</p>
 </header>
 
-<section class="hero">
-  <h2>Buy & Sell Digital Services Securely</h2>
-  <a href="#market">Explore Marketplace</a>
-</section>
-
-<section class="section" id="market">
-  <h3 style="text-align:center;">Marketplace</h3>
-  <div class="market" id="marketList"></div>
-</section>
-
-<!-- CHECKOUT MODAL -->
-<div class="modal" id="checkout">
-  <div class="modal-box" id="checkoutBox">
-    <h3>Checkout</h3>
-    <p id="orderItem"></p>
-    <p><strong id="orderPrice"></strong></p>
-
-    <div class="payment-methods">
-      <label><input type="radio" name="pay" checked> Card</label>
-      <label><input type="radio" name="pay"> Bank Transfer</label>
-      <label><input type="radio" name="pay"> Crypto (USDT)</label>
-    </div>
-
-    <button onclick="payNow()">Pay Now</button>
+<section class="market">
+  <div class="card">
+    <h3>Streaming Accounts</h3>
+    <p>Netflix, Spotify, Prime, etc.</p>
+    <a href="streaming.html">View Available</a>
   </div>
 
-  <div class="modal-box success" id="successBox">
-    <h3>Payment Successful ✅</h3>
-    <p>Your order is being processed.</p>
-    <button onclick="closeCheckout()">Close</button>
+  <div class="card">
+    <h3>Software Licenses</h3>
+    <p>Premium tools & apps</p>
+    <a href="#">Coming Soon</a>
   </div>
-</div>
 
-<script>
-const items = [
-  { name: "Streaming Account", price: "$5" },
-  { name: "Software License", price: "$10" },
-  { name: "Digital Services", price: "$15" }
-];
-
-const market = document.getElementById("marketList");
-const checkout = document.getElementById("checkout");
-
-items.forEach(item => {
-  market.innerHTML += `
-    <div class="item">
-      <h4>${item.name}</h4>
-      <span>${item.price}</span><br><br>
-      <button onclick="openCheckout('${item.name}','${item.price}')">
-        Buy Now
-      </button>
-    </div>
-  `;
-});
-
-function openCheckout(name, price) {
-  document.getElementById("orderItem").innerText = name;
-  document.getElementById("orderPrice").innerText = price;
-  checkout.style.display = "flex";
-}
-
-function closeCheckout() {
-  checkout.style.display = "none";
-  document.getElementById("checkoutBox").style.display = "block";
-  document.getElementById("successBox").style.display = "none";
-}
-
-function payNow() {
-  document.getElementById("checkoutBox").style.display = "none";
-  document.getElementById("successBox").style.display = "block";
-}
-</script>
+  <div class="card">
+    <h3>Digital Services</h3>
+    <p>Accounts & subscriptions</p>
+    <a href="#">Coming Soon</a>
+  </div>
+</section>
 
 </body>
 </html>
